@@ -1,0 +1,39 @@
+# Pinned versions this setup was built and tested against.
+# Every entry traces back to a URL fetched and read during development —
+# nothing here is from memory. Update by running scripts/check-updates.sh,
+# which only diffs against upstream and reports — it never auto-bumps.
+
+neovim:
+  source: https://github.com/neovim/neovim
+  installed_version: "0.12.6"
+  install_method: "official linux64 tarball to ~/.local/opt, symlinked into ~/.local/bin"
+  min_required: "0.11.2"
+
+lazyvim_starter:
+  source: https://github.com/LazyVim/starter
+  note: "cloned, .git stripped on first use — this is a template, not a pinned package"
+
+lazyvim:
+  source: https://github.com/LazyVim/LazyVim
+  installed_version: "v16.0.1"
+  installed_commit: "99970099"
+  extra_used: "lua/lazyvim/plugins/extras/ai/claudecode.lua"
+  extra_import_path: "lazyvim.plugins.extras.ai.claudecode"
+  doc_note: >-
+    This extra exists in the LazyVim repo but is NOT listed on
+    lazyvim.org/extras as of this writing — verified by reading the source
+    file directly, not the docs site.
+
+claudecode_nvim:
+  source: https://github.com/coder/claudecode.nvim
+  installed_version: "0.2.0"
+  pulled_via: "the lazyvim extra above, not added as a direct plugin spec"
+
+lazyclaude_cli:
+  source: https://github.com/idossha/lazyclaude
+  installed_version: "0.1.0"
+  install_method: "cargo install lazyclaude"
+
+lazyclaude_nvim:
+  source: https://github.com/idossha/lazyclaude.nvim
+  install_method: "local plugin spec at lua/plugins/lazyclaude.lua (this repo writes it for you)"
