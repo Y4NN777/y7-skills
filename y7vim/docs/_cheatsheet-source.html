@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @page { size: A4; margin: 14mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Helvetica", "Arial", sans-serif; color: #000; margin: 0; }
+  .header { display: flex; justify-content: space-between; align-items: baseline;
+             border-bottom: 1.5pt solid #000; padding-bottom: 4mm; margin-bottom: 4mm; }
+  .header h1 { font-size: 20pt; margin: 0; }
+  .header .sub { font-size: 10pt; color: #555; }
+  .leader { font-size: 11pt; font-weight: bold; margin: 0 0 1mm 0; }
+  .leader-note { font-size: 8.5pt; color: #555; margin: 0 0 4mm 0; }
+  .cols { display: flex; gap: 8mm; }
+  .col { flex: 1; }
+  h2 { font-size: 10.5pt; text-transform: uppercase; letter-spacing: 0.3pt;
+       border-bottom: 0.5pt solid #000; padding-bottom: 1mm; margin: 3mm 0 1.5mm 0; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 1mm; }
+  td { font-size: 8.5pt; padding: 1pt 0; vertical-align: top; }
+  td.key { font-family: "Courier New", monospace; font-weight: bold; width: 26mm; white-space: nowrap; }
+  tr { border-bottom: 0.3pt solid #ddd; }
+  .footer { display: flex; justify-content: space-between; font-size: 7.5pt; color: #555;
+            border-top: 0.5pt solid #999; margin-top: 5mm; padding-top: 2mm; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>y7vim cheatsheet</h1>
+  <div class="sub">LazyVim + Claude Code</div>
+</div>
+
+<p class="leader">&lt;leader&gt; = Space</p>
+<p class="leader-note">Press Space, release, then the next key(s). Press Space alone and wait: which-key shows every option.</p>
+
+<div class="cols">
+  <div class="col">
+    <h2>Files &amp; search</h2>
+    <table>
+      <tr><td class="key">&lt;leader&gt;e</td><td>Toggle file explorer</td></tr>
+      <tr><td class="key">&lt;leader&gt;ff</td><td>Find file by name</td></tr>
+      <tr><td class="key">&lt;leader&gt;&lt;space&gt;</td><td>Find file (quick)</td></tr>
+      <tr><td class="key">&lt;leader&gt;fg</td><td>Search in files (grep)</td></tr>
+      <tr><td class="key">&lt;leader&gt;fr</td><td>Recent files</td></tr>
+    </table>
+
+    <h2>Buffers &amp; windows</h2>
+    <table>
+      <tr><td class="key">&lt;leader&gt;bd</td><td>Close buffer</td></tr>
+      <tr><td class="key">Tab / S-Tab</td><td>Next / prev buffer</td></tr>
+      <tr><td class="key">&lt;leader&gt;-</td><td>Split window below</td></tr>
+      <tr><td class="key">&lt;leader&gt;|</td><td>Split window right</td></tr>
+      <tr><td class="key">C-h/j/k/l</td><td>Move between windows</td></tr>
+    </table>
+
+    <h2>LSP (hover a symbol first)</h2>
+    <table>
+      <tr><td class="key">gd</td><td>Go to definition</td></tr>
+      <tr><td class="key">gr</td><td>Go to references</td></tr>
+      <tr><td class="key">K</td><td>Hover docs</td></tr>
+      <tr><td class="key">&lt;leader&gt;ca</td><td>Code action</td></tr>
+      <tr><td class="key">&lt;leader&gt;cr</td><td>Rename symbol</td></tr>
+      <tr><td class="key">&lt;leader&gt;cf</td><td>Format buffer</td></tr>
+    </table>
+  </div>
+
+  <div class="col">
+    <h2>Claude Code chat (claudecode.nvim)</h2>
+    <table>
+      <tr><td class="key">&lt;leader&gt;ac</td><td>Toggle Claude terminal</td></tr>
+      <tr><td class="key">&lt;leader&gt;ab</td><td>Add buffer to context</td></tr>
+      <tr><td class="key">&lt;leader&gt;af</td><td>Focus Claude terminal</td></tr>
+      <tr><td class="key">&lt;leader&gt;ar</td><td>Resume previous session</td></tr>
+      <tr><td class="key">&lt;leader&gt;aC</td><td>Continue last conversation</td></tr>
+      <tr><td class="key">&lt;leader&gt;aa</td><td>Accept proposed diff</td></tr>
+      <tr><td class="key">&lt;leader&gt;ad</td><td>Deny proposed diff</td></tr>
+    </table>
+
+    <h2>Claude config TUI (lazyclaude.nvim)</h2>
+    <table>
+      <tr><td class="key">&lt;leader&gt;lc</td><td>Open LazyClaude TUI</td></tr>
+    </table>
+
+    <h2>Terminal / git</h2>
+    <table>
+      <tr><td class="key">&lt;leader&gt;gg</td><td>Open lazygit</td></tr>
+      <tr><td class="key">C-/</td><td>Toggle terminal</td></tr>
+    </table>
+
+    <h2>Modes (bottom-left status)</h2>
+    <table>
+      <tr><td class="key">NORMAL</td><td>Move / run commands (Esc to enter)</td></tr>
+      <tr><td class="key">INSERT</td><td>Typing text (i to enter)</td></tr>
+      <tr><td class="key">VISUAL</td><td>Select text (v to enter)</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <span>github.com/Y4NN777/y7-skills — y7vim namespace</span>
+  <span>Full reference: y7vim/skills/*/references/*.md</span>
+</div>
+
+</body>
+</html>
