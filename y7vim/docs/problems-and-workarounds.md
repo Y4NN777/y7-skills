@@ -91,6 +91,28 @@ header lines; same bug recurred in `detect-and-enable.sh`'s detection loop
 and was fixed the same way after actually running it against a fixture
 project and getting exit code 1 with no output.
 
+## lazyclaude.nvim read the wrong Claude Code config directory
+
+**Symptom:** the LazyClaude TUI (`<leader>lc`) showed a different set of
+skills/agents/settings than the ones actually in use in Claude Code
+sessions on this machine.
+**Cause:** `lazyclaude` defaults to `~/.claude` (confirmed via
+`lazyclaude --help`), but this machine's Claude Code sessions run with
+`CLAUDE_CONFIG_DIR` set to a different directory. `lazyclaude paths`
+without `--claude-dir` silently resolved every path (settings, skills,
+agents, memory) under the wrong, stale directory — no error, just wrong
+data.
+**Fix:** pass `claude_dir = vim.env.CLAUDE_CONFIG_DIR or
+vim.fn.expand("~/.claude")` in the plugin's `setup()` call, so it respects
+the env var when the session sets one. Verified with
+`lazyclaude --claude-dir <dir> paths` showing all paths correctly
+redirected, then confirmed `require('lazyclaude').config.claude_dir`
+resolves correctly from inside nvim.
+**How we caught it:** the user noticed the config shown didn't match what
+they expected and asked directly — not caught by the automated test
+suite, since `is_available()` only checks the binary exists, not which
+config directory it's pointed at. Consider adding a check for this.
+
 ## A pasted GitHub skill-install URL simply didn't exist
 
 **Symptom:** `npx skills add https://github.com/RuanBuitendag42/.dotfiles

@@ -19,7 +19,13 @@ return {
     { "<leader>lc", "<cmd>LazyClaude<cr>", desc = "LazyClaude (Claude Code config TUI)" },
   },
   config = function()
-    require("lazyclaude").setup({})
+    -- lazyclaude defaults to ~/.claude, but if this machine's Claude Code
+    -- session sets CLAUDE_CONFIG_DIR to something else (e.g. ~/.aclaude),
+    -- the TUI would otherwise show a different, possibly stale config than
+    -- the one actually driving the session. Respect it when set.
+    require("lazyclaude").setup({
+      claude_dir = vim.env.CLAUDE_CONFIG_DIR or vim.fn.expand("~/.claude"),
+    })
   end,
 }
 LUA

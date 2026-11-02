@@ -66,6 +66,14 @@ done
 OUT=$(run_lua "lua local maps=vim.api.nvim_get_keymap('n'); for _,m in ipairs(maps) do if m.lhs==' lc' then print('MAP_OK') end end")
 echo "$OUT" | grep -q 'MAP_OK' && pass "lazyclaude keymap <leader>lc registered" || fail "lazyclaude keymap <leader>lc missing"
 
+OUT=$(run_lua "lua local ok,mod = pcall(require,'lazyclaude'); if ok then print('CLAUDE_DIR:'..tostring(mod.config.claude_dir)) end")
+EXPECTED_DIR="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+if echo "$OUT" | grep -q "CLAUDE_DIR:$EXPECTED_DIR"; then
+  pass "lazyclaude.config.claude_dir matches \$CLAUDE_CONFIG_DIR ($EXPECTED_DIR)"
+else
+  fail "lazyclaude.config.claude_dir does not match \$CLAUDE_CONFIG_DIR -- expected $EXPECTED_DIR, got: $OUT (see docs/problems-and-workarounds.md: 'lazyclaude.nvim read the wrong Claude Code config directory')"
+fi
+
 echo
 echo "== Keymap collision check (<leader>a* vs <leader>l*) =="
 OUT=$(run_lua "lua local maps=vim.api.nvim_get_keymap('n'); local seen={}; local dup=false; for _,m in ipairs(maps) do if seen[m.lhs] then dup=true; print('DUP:'..m.lhs) end; seen[m.lhs]=true end; if not dup then print('NO_DUPLICATES') end")
