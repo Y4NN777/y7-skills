@@ -1,7 +1,7 @@
 # y7-skills
 
 Personal [Agent Skills](https://github.com/anthropics/skills), built and
-improved over time as I actually use them as a developer/engineer. Each
+improved over time as I actually use them to build and break. Each
 top-level folder is one *namespace* — a related family of skills for one
 area of my toolchain — not a single skill itself.
 
