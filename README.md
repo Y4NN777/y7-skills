@@ -1,76 +1,35 @@
-# y7vim
+# y7-skills
 
-Three composed [Agent Skills](https://github.com/anthropics/skills) for
-running Claude Code inside Neovim + LazyVim — install, verify, and
-auto-adapt to whatever project you open.
+Personal [Agent Skills](https://github.com/anthropics/skills), built and
+improved over time as I actually use them as a developer/engineer. Each
+top-level folder is one *namespace* — a related family of skills for one
+area of my toolchain — not a single skill itself.
 
-| Skill | What it does |
+This repo is the root all of them live under. See
+[`CONVENTIONS.md`](CONVENTIONS.md) for the structure every namespace and
+skill here follows, and [`CLAUDE.md`](CLAUDE.md) for the rules Claude Code
+itself should follow when working in this repo.
+
+## Namespaces
+
+| Namespace | What it covers |
 |---|---|
-| [`y7vim-claudecode`](skills/y7vim-claudecode/) | Live Claude Code chat/diff-review in a terminal split, via LazyVim's own `ai.claudecode` extra |
-| [`y7vim-lazyclaude`](skills/y7vim-lazyclaude/) | A lazygit-style floating TUI for browsing/editing Claude Code's on-disk config (skills, agents, MCP, hooks) |
-| [`y7vim-autodetect`](skills/y7vim-autodetect/) | Detects a project's language/tooling and enables the matching LazyVim extra automatically — no `:LazyExtras` picker needed |
+| [`y7vim/`](y7vim/) | Neovim + LazyVim + Claude Code: install, config management, and auto-detecting project tooling |
 
-Each one is self-contained: its own `SKILL.md`, idempotent install
-scripts, a `verify.sh`, and a `references/` folder with the exact
-commands/keymaps/markers it uses — sourced directly from the upstream
-projects, not from memory. See each skill's `SKILL.md` for details.
+More get added as I build them — never as a rewrite of what's here, always
+alongside.
 
 ## Install a skill
 
 ```sh
-npx skills add https://github.com/Y4NN777/y7-skills --skill y7vim-claudecode
-npx skills add https://github.com/Y4NN777/y7-skills --skill y7vim-lazyclaude
-npx skills add https://github.com/Y4NN777/y7-skills --skill y7vim-autodetect
+npx skills add https://github.com/Y4NN777/y7-skills --skill <skill-name>
 ```
 
-Or clone and run each skill's scripts directly — see
-[`sources.yml`](sources.yml) for the exact upstream versions this was
-built and tested against, and
-[`docs/claude-code-integration.md`](docs/claude-code-integration.md) for
-how the pieces fit together and what the shared test suite covers.
+Skill names are namespaced (e.g. `y7vim-claudecode`, `y7vim-lazyclaude`,
+`y7vim-autodetect`) so they stay unambiguous as more namespaces get added.
 
-## Requirements
+## What this repo is not
 
-- Neovim >= 0.11.2 (built with LuaJIT)
-- Git >= 2.19.0
-- [Claude Code CLI](https://claude.com/claude-code) (`claude`) on `$PATH`
-- Rust/cargo or Homebrew, for the `lazyclaude` CLI (only needed for
-  `y7vim-lazyclaude`)
-- A LazyVim config at `~/.config/nvim` — the official
-  [starter](https://github.com/LazyVim/starter) or your own
-
-## Testing
-
-```sh
-./scripts/test-config.sh
-```
-
-31 automated checks against a live LazyVim config: plugin load, both
-Claude integrations' require/keymaps/commands, keymap collisions,
-`:checkhealth`, and Mason binary presence. See
-[`docs/claude-code-integration.md`](docs/claude-code-integration.md) for
-exactly what's covered and what still needs a manual check.
-
-## Known issues & how we fixed them
-
-[`docs/problems-and-workarounds.md`](docs/problems-and-workarounds.md) — a
-running log of every real snag hit while building this, kept updated as
-the repo grows. Includes two real test-script bugs (a `--noplugin` flag
-that silently disabled everything it was testing, and `set -e` quietly
-dropping loop iterations on an empty `grep`) found by actually running the
-scripts, not just writing them.
-
-## What this deliberately leaves out
-
-No telemetry, no usage tracking, no onboarding/consent gates, no
-business-review tooling. Just scripts, docs, and tests for a developer
-setup — pure tooling, nothing else.
-
-## Updating pinned versions
-
-```sh
-./scripts/check-updates.sh
-```
-
-Report-only — diffs `sources.yml` against upstream and never auto-bumps.
-Review, edit `sources.yml` by hand, re-run the test suite, commit.
+Not a product, not a team tool, not something with telemetry, onboarding
+gates, or business-review layers. Just my own tooling, documented well
+enough that future-me (or anyone else) can pick it back up.
